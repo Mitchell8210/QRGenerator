@@ -11,11 +11,9 @@ function App() {
     if (value !== "") {
       QRCode.toDataURL(value)
         .then((url) => {
-          console.log(url);
           setQRUrl(url);
         })
         .catch((err) => {
-          console.error(err);
           setError(err);
           return err;
         });
@@ -49,9 +47,39 @@ function App() {
           </button>
           {qrUrl && (
             <div className="img">
-              <img src={qrUrl} width="150px" />
+              <img src={qrUrl} width="150px" alt="code" />
             </div>
           )}
+        </div>
+        <div className="created-by">
+          Created by{" "}
+          <a
+            href="https://mitchell-rhoads-dev.netlify.app/"
+            target="_blank"
+            rel="noreferrer"
+          >
+            Mitchell Rhoads
+          </a>{" "}
+          with the help of an{" "}
+          <a
+            href="https://www.npmjs.com/package/qrcode"
+            rel="noreferrer"
+            target="_blank"
+          >
+            npm package
+          </a>
+          .
+        </div>
+        <div className="created-by">
+          Check out the{" "}
+          <a
+            href="https://github.com/Mitchell8210/QRGenerator"
+            target="_blank"
+            rel="noreferrer"
+          >
+            GitHub repo
+          </a>
+          .
         </div>
       </header>
     </div>

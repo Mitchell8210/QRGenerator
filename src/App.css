@@ -21,9 +21,17 @@
   color: orange;
   font-size: 12px;
 }
+.created-by {
+  margin-bottom: 10px;
+  padding: 10px;
+}
+.created-by a {
+  color: turquoise;
+}
 .button {
   color: black;
-  background-color: palegreen;
+  background-color: turquoise;
+  font-weight: bold;
   padding: 8px;
   width: 80%;
   margin: auto;
@@ -37,7 +45,7 @@
   margin-bottom: 20px;
 }
 .title {
-  font-size: 30px;
+  font-size: 35px;
   margin-bottom: 20px;
 }
 .subTitle {
