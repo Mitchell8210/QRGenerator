@@ -41,7 +41,7 @@
   padding: 10px;
   background-color: slategrey;
   outline: none;
-  min-width: 250px;
+  width: 280px;
   margin-bottom: 20px;
 }
 .input::placeholder {
