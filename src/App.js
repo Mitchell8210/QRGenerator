@@ -8,26 +8,36 @@ function App() {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
   const [qrUrl, setQRUrl] = useState("");
+  const [googleSearchString, setGoogleSearchString] = useState("");
   const props = useSpring({
     from: { opacity: 0 },
     to: { opacity: 1 },
     reset: qrUrl !== "",
     config: config.molasses,
   });
+  const googlePrefix = "https://www.google.com/search?q=";
   const generate = () => {
     if (value !== "") {
+      const query = value.replace(/\s/g, "+");
+      setGoogleSearchString(googlePrefix + query);
       QRCode.toDataURL(value)
         .then((url) => {
           setQRUrl(url);
+          console.log("url", url);
         })
         .catch((err) => {
           setError(err);
           return err;
         });
-      setValue("");
     } else {
       setError(true);
     }
+  };
+  const clear = () => {
+    setValue("");
+    setQRUrl("");
+    setGoogleSearchString("");
+    setError("");
   };
 
   return (
@@ -42,6 +52,7 @@ function App() {
           <input
             type="text"
             className="input"
+            placeholder="ex. www.google.com"
             value={value}
             onChange={(e) => {
               setValue(e.target.value);
@@ -53,10 +64,18 @@ function App() {
             Submit
           </button>
           {qrUrl && (
-            <div className="img">
-              <animated.div style={props}>
-                <img src={qrUrl} width="150px" alt="code" />
-              </animated.div>
+            <div>
+              <div>Click the QR Code to verify it works!</div>
+              <div className="img">
+                <animated.div style={props}>
+                  <a href={googleSearchString} target="_blank" rel="noreferrer">
+                    <img src={qrUrl} width="150px" alt="code" />
+                  </a>
+                </animated.div>
+              </div>
+              <button className="reset-button" onClick={() => clear()}>
+                Reset
+              </button>
             </div>
           )}
         </div>
