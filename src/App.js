@@ -1,5 +1,6 @@
 import React, { useState } from "react";
 import QRCode from "qrcode";
+import { useSpring, animated, config } from "react-spring";
 
 import "./App.css";
 
@@ -7,6 +8,12 @@ function App() {
   const [value, setValue] = useState("");
   const [error, setError] = useState(false);
   const [qrUrl, setQRUrl] = useState("");
+  const props = useSpring({
+    from: { opacity: 0 },
+    to: { opacity: 1 },
+    reset: qrUrl !== "",
+    config: config.molasses,
+  });
   const generate = () => {
     if (value !== "") {
       QRCode.toDataURL(value)
@@ -47,7 +54,9 @@ function App() {
           </button>
           {qrUrl && (
             <div className="img">
-              <img src={qrUrl} width="150px" alt="code" />
+              <animated.div style={props}>
+                <img src={qrUrl} width="150px" alt="code" />
+              </animated.div>
             </div>
           )}
         </div>
